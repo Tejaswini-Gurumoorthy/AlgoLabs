@@ -1,45 +1,59 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 100  ;
+const int N = 100;
 vector<int> graph[N];
-bool vis[N];
+vector <int> vis;
+int cnt;
 
 void dfs(int vertex)
 {
-    //1. After entering the vertex
+    cnt++;
     cout<<vertex<<" ";
-    vis[vertex]= true;
+    cnt++;
+    vis.push_back(1);
     for(int child : graph[vertex])
     {
-        // cout<<"parent : "<<vertex<<" child : "<<child<<endl;
-        //2.Before entering child node
+        cnt++;
+        cout<<"parent : "<<vertex<<"child : "<<child<<endl;
+        cnt++;
         if(vis[child])
         {
+            cnt++;
             continue;
         }
         dfs(child);
-        //3. After exiting child node
     }
-    //4. Before exiting vertex
 
 }
 
 
 int main()
 {
+    cnt++;
     int n,m;
+    cnt++;
     cin>>n>>m;
+    cnt++;
     for(int i=0;i<m;i++)
     {
+        cnt++;
         int v1,v2;
+        cnt++;
         cin>>v1>>v2;
+        cnt++;
         graph[v1].push_back(v2);
+        cnt++;
         graph[v2].push_back(v1);
     }
+    cnt++;
+    cnt++;
     int vert;
+    cnt++;
     cout<<"Enter vertex to start with : "<<endl;
+    cnt++;
     cin>>vert;
-    dfs(vert);
+    cnt++;
+    cout<<"Total number of steps : "<<cnt<<endl;
     
 
 }
