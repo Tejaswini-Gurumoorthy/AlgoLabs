@@ -1,40 +1,43 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-const int N = 100;
-vector<int> graph[N];
-vector <int> vis;
+const int N=100;
+vector<int> g[N];
+bool vis[N]={0};
 
-void dfs(int vertex)
+void dfs(int start)
 {
-    cout<<vertex<<" ";
-    vis.push_back(1);
-    for(int child : graph[vertex])
+    cout<<start<<" " ;
+    vis[start]=true;
+    for(auto child: g[start])
     {
-        cout<<"parent : "<<vertex<<"child : "<<child<<endl;
         if(vis[child])
         {
             continue;
         }
-        dfs(child);
+        else
+        {
+            dfs(child);
+        }
     }
+    return;
 
 }
 
-
 int main()
 {
-    int n,m;
-    cin>>n>>m;
-    for(int i=0;i<m;i++)
+    int n, m,vert;
+    cout << "Enter number of vertices and edges : " << endl;
+    cin >> n >> m;
+   
+    cout << "Enter the graph : " << endl;
+    for (int i = 0; i < m; i++)
     {
-        int v1,v2;
-        cin>>v1>>v2;
-        graph[v1].push_back(v2);
-        graph[v2].push_back(v1);
+        int v1, v2;
+        cin >> v1 >> v2;
+        g[v1].push_back(v2);
+        g[v2].push_back(v1);
     }
-    int vert;
-    cout<<"Enter vertex to start with : "<<endl;
+    cout<<"Enter starting vertex : "<<endl;
     cin>>vert;
-    
-
+    dfs(vert);
 }
