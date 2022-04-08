@@ -1,56 +1,55 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-const int N = 100  ;
-vector<int> graph[N];
-bool vis[N];
+const int N=100;
+vector<int> g[N];
+bool vis[N]={0};
 
-void dfs(int vertex)
+void dfs(int start)
 {
-    //1. After entering the vertex
-    // cout<<vertex<<" ";
-    vis[vertex]= true;
-    for(int child : graph[vertex])
+    cout<<start<<" " ;
+    vis[start]=true;
+    for(auto child: g[start])
     {
-        // cout<<"parent : "<<vertex<<" child : "<<child<<endl;
-        //2.Before entering child node
         if(vis[child])
         {
             continue;
         }
-        dfs(child);
-        //3. After exiting child node
+        else
+        {
+            dfs(child);
+        }
     }
-    //4. Before exiting vertex
+    return;
 
 }
 
-
 int main()
 {
-    int n,m;
-    cin>>n>>m;
-    for(int i=0;i<m;i++)
+    int n, m;
+    cout << "Enter number of vertices and edges : " << endl;
+    cin >> n >> m;
+   
+    cout << "Enter the graph : " << endl;
+    for (int i = 0; i < m; i++)
     {
-        int v1,v2;
-        cin>>v1>>v2;
-        graph[v1].push_back(v2);
-        graph[v2].push_back(v1);
+        int v1, v2;
+        cin >> v1 >> v2;
+        g[v1].push_back(v2);
+        g[v2].push_back(v1);
     }
-    int vert= 1;
-    dfs(vert);
-    bool flag=true;
-    for(int i=1;i<=n;i++)
+    dfs(0);
+    int f=1;
+    for(int i=0;i<n;i++)
     {
-        if(vis[i]==false)
+        if(vis[i]==0)
         {
-            cout<<"Not Connected"<<endl;
-            flag=false;
+            cout<<"Graph is disconnected"<<endl;
+            f=0;
             break;
         }
     }
-    if(flag)
-    cout<<"Connected"<<endl;
-
-    
-
+    if(f)
+    {
+        cout<<"Graph is connected "<<endl;
+    }
 }
