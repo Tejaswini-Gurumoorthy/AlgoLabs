@@ -9,17 +9,16 @@ void bfs(int start)
     bool enqueued[N] = {0};
     queue<int> q;
     q.push(start);
-    enqueued[start] = 1;
     cout << q.back();
 
     while (!q.empty())
     {
         for (auto child : g[q.front()])
         {
-            if (enqueued[child] == 0)
+            if (vis[child] == 0)
             {
                 q.push(child);
-                enqueued[child] = true;
+                vis[child] = true;
                 cout << q.back()<<" ";
             }
         }
